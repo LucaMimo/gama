@@ -16,6 +16,7 @@ import msi.gama.runtime.benchmark.StopWatch;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Abstract class that defines the structure of all expression classes.
@@ -29,6 +30,9 @@ public abstract class AbstractExpression implements IExpression {
 
 	@Override
 	public IType<?> getGamlType() {
+		if(DEBUG.flag2) {
+			System.out.println("      left type "+type.toString());
+		}
 		return type == null ? Types.NO_TYPE : type;
 	}
 

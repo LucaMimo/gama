@@ -24,7 +24,7 @@ public abstract class VariableExpression extends AbstractExpression implements I
 			final IDescription definitionDescription) {
 		name = n;
 		if(DEBUG.flag2&&name.equals("each")) {
-			System.out.println("   each of type "+type);
+			System.out.println("       VariableExpression of type "+type);
 		}
 		setType(type);
 		isNotModifiable = notModifiable;

@@ -376,7 +376,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final boolean isIterator = ITERATORS.contains(op);
 		if (isIterator) {
 			if(DEBUG.flag2) {
-				System.out.println(left);
+				System.out.println("   binary "+left);
 			}
 			final IType t = left.getGamlType().getContentType();
 			final String argName = findIteratorArgName(rightMember);
@@ -528,8 +528,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final IExpression owner = compile(leftExpr);
 		if (owner == null) { return null; }
 		if(EGaml.getKeyOf(fieldExpr).equals("energy")&&DEBUG.flag2) {
-			System.out.println(owner+" "+owner.getGamlType());
-			IExpression ow = compile(leftExpr);
+			System.out.println();
+//			System.out.println(owner+" "+owner.getGamlType());
+//			IExpression ow = compile(leftExpr);
 		}
 		final IType type = owner.getGamlType();
 		final TypeDescription species = type.getSpecies();
