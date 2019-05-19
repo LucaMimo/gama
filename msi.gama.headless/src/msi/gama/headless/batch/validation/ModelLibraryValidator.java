@@ -2,26 +2,22 @@ package msi.gama.headless.batch.validation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Multimap;
+import com.google.inject.Injector;
 
 import msi.gama.headless.batch.AbstractModelLibraryRunner;
 import msi.gama.headless.core.HeadlessSimulationLoader;
 import msi.gama.headless.runtime.SystemLogger;
 import msi.gama.lang.gaml.validation.GamlModelBuilder;
-import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gaml.compilation.GamlCompilationError;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
-import msi.gaml.operators.Dates;
 
 public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 
@@ -33,11 +29,11 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 
 	@Override
 	public int start(final List<String> args) throws IOException {
-		HeadlessSimulationLoader.preloadGAMA();
+		Injector injector = HeadlessSimulationLoader.preloadGAMA();
+		GamlModelBuilder builder = createBuilder(injector);
 		final int[] count = { 0 };
 		final int[] code = { 0, 0 };
 		final Multimap<Bundle, String> plugins = GamaBundleLoader.getPluginsWithModels();
-		System.out.println("getPluginsWithModels");
 		List<URL> allURLs = new ArrayList<>();
 		for (final Bundle bundle : plugins.keySet()) {
 			for (final String entry : plugins.get(bundle)) {
@@ -52,10 +48,8 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 					}
 			}
 		}
-		GamlModelBuilder.loadURLs(allURLs);
-
-		System.out.println("loadURLs");
-		allURLs.forEach(u -> validate(count, code, u));
+		builder.loadURLs(allURLs);
+		allURLs.forEach(u -> validate(builder, count, code, u));
 
 		System.out.println("" + count[0] + " GAMA models compiled in built-in library and plugins. " + code[0]
 				+ " compilation errors found");
@@ -78,9 +72,9 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 					}
 			}
 		}
-		GamlModelBuilder.loadURLs(allURLs);
+		builder.loadURLs(allURLs);
 
-		allURLs.forEach(u -> validate(count, code, u));
+		allURLs.forEach(u -> validate(builder, count, code, u));
 
 		System.out.println("" + count[0] + " GAMA tests compiled in built-in library and plugins. " + code[0]
 				+ " compilation errors found");
@@ -88,20 +82,16 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 		return code[0] + code[1];
 	}
 
-	private void validate(final int[] countOfModelsValidated, final int[] returnCode, final URL pathToModel) {
+	private void validate(GamlModelBuilder builder, final int[] countOfModelsValidated, final int[] returnCode,
+			final URL pathToModel) {
 		final List<GamlCompilationError> errors = new ArrayList<>();
-		log("Compiling " + pathToModel.getFile());
-//		System.out.println("Compiling " + pathToModel.getFile());
-		try {
-			GamlModelBuilder.compile(pathToModel, errors);
-		} catch (final Exception ex) {
-			System.out.println(ex.getMessage());
-		}
+		// log("Compiling " + pathToModel.getFile());
+		builder.compile(pathToModel, errors);
 		countOfModelsValidated[0]++;
 		errors.stream().filter(e -> e.isError()).forEach(e -> {
-			log("Error in " + e.getURI().lastSegment() + ": " + e);
-			System.out.println("Error in " + e.getURI() + ":\n " + ((GamlCompilationError) e).toString() + " \n "
-					+ ((GamlCompilationError) e).getStatement().toString() + "\n");
+			// log("Error in " + e.getURI().lastSegment() + ": " + e);
+			System.out.println(
+					"Error in " + e.getURI() + ":\n " + e.toString() + " \n " + e.getStatement().toString() + "\n");
 			returnCode[0]++;
 		});
 	}

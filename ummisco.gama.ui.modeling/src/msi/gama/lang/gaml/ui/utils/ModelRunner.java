@@ -4,7 +4,7 @@
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.utils;
@@ -44,6 +44,7 @@ import msi.gaml.compilation.GamlCompilationError;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.statements.test.WithTestSummary;
+import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.interfaces.IModelRunner;
 import ummisco.gama.ui.modeling.internal.ModelingActivator;
 import ummisco.gama.ui.navigator.contents.WrappedGamaFile;
@@ -74,7 +75,7 @@ public class ModelRunner extends AbstractServiceFactory implements IModelRunner 
 		} else if (eObject instanceof IFile) {
 			final IFile file = (IFile) eObject;
 			if (!file.exists()) {
-				GAMA.getGui().debug("File " + file.getFullPath().toString() + " does not exist in the workspace");
+				DEBUG.LOG("File " + file.getFullPath().toString() + " does not exist in the workspace");
 				return;
 			}
 			try {
@@ -139,7 +140,7 @@ public class ModelRunner extends AbstractServiceFactory implements IModelRunner 
 		if (object instanceof URI) {
 			final URI uri = (URI) object;
 			final List<GamlCompilationError> errors = new ArrayList<>();
-			final IModel model = GamlModelBuilder.compile(uri, errors);
+			final IModel model = GamlModelBuilder.getDefaultInstance().compile(uri, errors);
 			if (model == null) {
 				GAMA.getGui().error("File " + uri.lastSegment() + " cannot be built because of " + errors.size()
 						+ " compilation errors");
@@ -150,7 +151,7 @@ public class ModelRunner extends AbstractServiceFactory implements IModelRunner 
 			final IXtextDocument doc = (IXtextDocument) object;
 			IModel model = null;
 			try {
-				model = doc.readOnly(state -> GamlModelBuilder.compile(state.getURI(), null));
+				model = doc.readOnly(state -> GamlModelBuilder.getDefaultInstance().compile(state.getURI(), null));
 			} catch (final GamaRuntimeException ex) {
 				GAMA.getGui()
 						.error("Experiment cannot be instantiated because of the following error: " + ex.getMessage());
