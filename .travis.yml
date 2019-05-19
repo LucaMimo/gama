@@ -9,8 +9,8 @@ notifications:
   email:
     recipients:
     - my.gama.bot@gmail.com
-    on_success: change
-    on_failure: always
+    on_success: never
+    on_failure: never
 cache:
   directories:
   - "$HOME/.m2"
@@ -30,5 +30,4 @@ after_success:
 - bash ./travis/publish.sh
 branches:
   only:
-    - master
-    - travis-test
+    - travistest
