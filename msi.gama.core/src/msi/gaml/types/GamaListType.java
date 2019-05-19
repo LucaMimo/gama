@@ -28,6 +28,7 @@ import msi.gama.util.GamaListFactory;
 import msi.gama.util.IContainer;
 import msi.gama.util.IList;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.dev.utils.DEBUG;
 
 @type (
 		name = IKeyword.LIST,
@@ -83,6 +84,9 @@ public class GamaListType extends GamaContainerType<IList> {
 
 	@Override
 	public IType contentsTypeIfCasting(final IExpression expr) {
+		if(DEBUG.flag2) {
+			System.out.println("          Gamalisttype contentsTypeIfCasting "+expr.toString());
+		}
 		switch (expr.getGamlType().id()) {
 			case COLOR:
 			case DATE:

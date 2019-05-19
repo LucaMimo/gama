@@ -20,6 +20,7 @@ import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.IContainer;
 import msi.gama.util.IList;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Written by drogoul Modified on 11 nov. 2011
@@ -81,6 +82,10 @@ public class GamaContainerType<T extends IContainer<?, ?>> extends GamaType<T> i
 
 	@Override
 	public IType<?> contentsTypeIfCasting(final IExpression exp) {
+
+		if(DEBUG.flag2) {
+			System.out.println("          GamaContainerType contentsTypeIfCasting "+exp.toString());
+		}
 		final IType<?> itemType = exp.getGamlType();
 		if (itemType.isContainer() || itemType.isAgentType()
 				|| itemType.isCompoundType()) { return itemType.getContentType(); }
