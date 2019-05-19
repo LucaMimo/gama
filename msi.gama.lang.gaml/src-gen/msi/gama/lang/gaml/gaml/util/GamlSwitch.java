@@ -4,6 +4,7 @@
 package msi.gama.lang.gaml.gaml.util;
 
 import msi.gama.lang.gaml.gaml.*;
+import ummisco.gama.dev.utils.DEBUG;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -71,6 +72,9 @@ public class GamlSwitch<T> extends Switch<T>
   @Override
   protected T doSwitch(int classifierID, EObject theEObject)
   {
+	  if(DEBUG.flag2) {
+		  System.out.print("        classifierID "+classifierID);
+	  }
     switch (classifierID)
     {
       case GamlPackage.ENTRY:

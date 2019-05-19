@@ -54,6 +54,9 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 		if (expressions.length == 0 || expressions[0] == null) {
 			exprs = null;
 		} else {
+			if(DEBUG.flag2) {
+				System.out.println(" AbstractNAryOperator "+expressions[0]+" "+expressions[1]);
+			}
 			exprs = Arrays.copyOf(expressions, expressions.length);
 		}
 		this.prototype = proto;
@@ -71,10 +74,16 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 		}
 		if (prototype == null) { return Types.NO_TYPE; }
 		IType result = computeType(prototype.typeProvider, 0, prototype.returnType, GamaType.TYPE);
+		if(DEBUG.flag2) {
+			System.out.print(" parametricType "+result);
+		}
 		if (result.isContainer()) {
 			final IType contentType = computeType(prototype.contentTypeProvider,
 					prototype.contentTypeContentTypeProvider, result.getContentType(), GamaType.CONTENT);
 			final IType keyType = computeType(prototype.keyTypeProvider, 0, result.getKeyType(), GamaType.KEY);
+			if(DEBUG.flag2) {
+				System.out.print(" contentType "+contentType+" keyType "+keyType);
+			}
 			result = GamaType.from(result, keyType, contentType);
 		}
 		if(DEBUG.flag2) {

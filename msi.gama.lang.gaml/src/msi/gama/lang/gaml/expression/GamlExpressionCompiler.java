@@ -200,9 +200,12 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 			return null;
 		}
 
+//		if(DEBUG.flag2) {
+//			System.out.print(" c");
+//		}
 		final IExpression expr = doSwitch(s);
 		if(DEBUG.flag2) {
-			System.out.println("    compile "+expr);
+			System.out.println("   geCompiler "+expr);
 		}
 		if (expr != null && getContext() != null) {
 			getContext().document(s, expr);
