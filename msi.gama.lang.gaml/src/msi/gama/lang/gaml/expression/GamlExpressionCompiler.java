@@ -376,7 +376,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final boolean isIterator = ITERATORS.contains(op);
 		if (isIterator) {
 			if(DEBUG.flag2) {
-				System.out.println("   binary "+left);
+				System.out.println("   binary "+left+" "+left.getGamlType().toString());
 			}
 			final IType t = left.getGamlType().getContentType();
 			final String argName = findIteratorArgName(rightMember);

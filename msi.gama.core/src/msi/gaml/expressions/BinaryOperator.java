@@ -19,6 +19,7 @@ import msi.gama.util.GAML;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.operators.Cast;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * The Class BinaryOperator.
@@ -38,6 +39,10 @@ public class BinaryOperator extends AbstractNAryOperator {
 
 	public BinaryOperator(final OperatorProto proto, final IDescription context, final IExpression... args) {
 		super(proto, args);
+		
+		if(DEBUG.flag2) {
+			System.out.println(exprs[0].toString()+ " "+exprs[1].toString());
+		}
 		prototype.verifyExpectedTypes(context, exprs[1].getGamlType());
 	}
 

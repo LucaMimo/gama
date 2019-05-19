@@ -567,7 +567,7 @@ public abstract class SymbolDescription implements IDescription {
 	public IDescription validate() {
 		if (validated) { return this; }
 		DEBUG.flag2=false;
-		if(DEBUG.flag && this.toString().contains("_internal_save")) {
+		if(DEBUG.flag && this.toString().contains("_internal_write")) {
 			DEBUG.flag2=true;
 			System.out.println(this);
 		}

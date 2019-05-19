@@ -30,9 +30,6 @@ public abstract class AbstractExpression implements IExpression {
 
 	@Override
 	public IType<?> getGamlType() {
-		if(DEBUG.flag2) {
-			System.out.println("      left type "+type.toString());
-		}
 		return type == null ? Types.NO_TYPE : type;
 	}
 

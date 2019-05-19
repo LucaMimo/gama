@@ -36,6 +36,7 @@ import msi.gaml.types.GamaType;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * AbstractBinaryOperator
@@ -72,6 +73,9 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 					prototype.contentTypeContentTypeProvider, result.getContentType(), GamaType.CONTENT);
 			final IType keyType = computeType(prototype.keyTypeProvider, 0, result.getKeyType(), GamaType.KEY);
 			result = GamaType.from(result, keyType, contentType);
+		}
+		if(DEBUG.flag2) {
+			System.out.println(result);
 		}
 		return result;
 	}

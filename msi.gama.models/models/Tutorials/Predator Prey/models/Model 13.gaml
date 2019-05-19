@@ -39,6 +39,8 @@ global {
 	}
 	
 	reflex save_result when: (nb_preys > 0) and (nb_predators > 0){
+		write ((predator as list) min_of each.energy);
+		/*
 		save ("cycle: "+ cycle + "; nbPreys: " + nb_preys
 			+ "; minEnergyPreys: " + ((prey as list) min_of each.energy)
 			+ "; maxSizePreys: " + ((prey as list) max_of each.energy) 
@@ -46,6 +48,7 @@ global {
 	   		+ "; minEnergyPredators: " + ((predator as list) min_of each.energy)          
 	   		+ "; maxSizePredators: " + ((predator as list) max_of each.energy)) 
 	   		to: "results.txt" type: "text" ;
+	   		*/
 	}
 	
 	reflex stop_simulation when: (nb_preys = 0) or (nb_predators = 0) {
