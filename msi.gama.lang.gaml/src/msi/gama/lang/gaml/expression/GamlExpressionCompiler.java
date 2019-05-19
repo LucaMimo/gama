@@ -375,6 +375,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		// sensitive "each" variable
 		final boolean isIterator = ITERATORS.contains(op);
 		if (isIterator) {
+			if(DEBUG.flag2) {
+				System.out.println(left);
+			}
 			final IType t = left.getGamlType().getContentType();
 			final String argName = findIteratorArgName(rightMember);
 			rightMember = findIteratorExpr(rightMember);
@@ -1276,10 +1279,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	//
 
 	public IVarExpression getEachExpr(final EObject object) {
-		final IVarExpression p = iteratorContexts.peek();
-		if(DEBUG.flag2) {
-			System.out.println(p);
-		}
+		final IVarExpression p = iteratorContexts.peek(); 
 		if (p == null) {
 			getContext().error("'each' is not accessible in this context", IGamlIssue.UNKNOWN_VAR, object);
 			return null;

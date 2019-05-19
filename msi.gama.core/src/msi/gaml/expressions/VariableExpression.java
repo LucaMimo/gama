@@ -12,6 +12,7 @@ package msi.gaml.expressions;
 
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.types.IType;
+import ummisco.gama.dev.utils.DEBUG;
 
 public abstract class VariableExpression extends AbstractExpression implements IVarExpression {
 
@@ -22,6 +23,9 @@ public abstract class VariableExpression extends AbstractExpression implements I
 	protected VariableExpression(final String n, final IType<?> type, final boolean notModifiable,
 			final IDescription definitionDescription) {
 		name = n;
+		if(DEBUG.flag2&&name.equals("each")) {
+			System.out.println("   each of type "+type);
+		}
 		setType(type);
 		isNotModifiable = notModifiable;
 		this.definitionDescription = definitionDescription;
