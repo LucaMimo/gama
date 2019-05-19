@@ -17,23 +17,12 @@ echo "GAMA is starting..."
 
 #GAMA=Gamaq
 java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -validate 
-ee(){
-res=$?
-		
+res=$?		
 if [[ $res -gt 0 ]]; then	
 	rm -rf $passWork
-	
-	echo "after first launch"
-	cd /home/travis/build/gama-platform/gama/ummisco.gama.product/target/products/ummisco.gama.application.product/linux/gtk/x86_64/configuration/org.eclipse.osgi
-	find . | grep "\.gaml$"
-
-
-	cd /home/travis/build/gama-platform/gama/ummisco.gama.product/target/products/ummisco.gama.application.product/linux/gtk/x86_64/headless
-
-
 	exit $res
 fi
-
+ee(){
 java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -test -failed   
 res=$?			
 if [[ $res -gt 0 ]]; then
