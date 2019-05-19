@@ -60,6 +60,9 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 			exprs = Arrays.copyOf(expressions, expressions.length);
 		}
 		this.prototype = proto;
+		if(DEBUG.flag2) {
+			System.out.println("  AbstractNAryOperator proto "+proto);
+		}
 		type = computeType();
 	}
 
@@ -118,6 +121,9 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 					}
 					break;
 				case SECOND_DENOTED_TYPE:
+					if(DEBUG.flag2) {
+						System.out.println(" SECOND_DENOTED_TYPE "+exprs[1].getDenotedType());
+					}
 					result = exprs[1].getDenotedType();
 					break;
 				case SECOND_CONTENT_TYPE_OR_TYPE:
