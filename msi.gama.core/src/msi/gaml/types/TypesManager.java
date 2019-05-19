@@ -52,6 +52,7 @@ public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDesc
 	public void alias(final String existingTypeName, final String otherTypeName) {
 		final IType t = types.get(existingTypeName);
 		if (t != null) {
+//			System.out.println("TypeManager alias "+t+" "+otherTypeName);
 			types.put(otherTypeName, t);
 		}
 	}
@@ -94,6 +95,9 @@ public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDesc
 
 	private IType<? extends IAgent> addSpeciesType(final IType<? extends IAgent> t,
 			final Class<? extends IAgent> clazz) {
+		if(DEBUG.flag) {
+			System.out.println("TypeManager addSpeciesType "+t+" "+clazz);
+		}
 		final int i = t.id();
 		final String name = t.toString();
 		types.put(name, t);
@@ -106,6 +110,7 @@ public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDesc
 	}
 
 	private IType addType(final IType t, final Class support) {
+		System.out.println("TypeManager addType "+t+" "+support);
 		final int i = t.id();
 		final String name = t.toString();
 		types.put(name, t);
