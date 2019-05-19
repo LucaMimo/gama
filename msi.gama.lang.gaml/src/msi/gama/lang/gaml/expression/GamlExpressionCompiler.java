@@ -524,8 +524,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 
 		final IExpression owner = compile(leftExpr);
 		if (owner == null) { return null; }
-		if(EGaml.getKeyOf(fieldExpr).equals("energy")&&DEBUG.flag) {
-			System.out.println(owner.getGamlType());
+		if(EGaml.getKeyOf(fieldExpr).equals("energy")&&DEBUG.flag2) {
+			System.out.println(owner+" "+owner.getGamlType());
+			IExpression ow = compile(leftExpr);
 		}
 		final IType type = owner.getGamlType();
 		final TypeDescription species = type.getSpecies();
@@ -1276,6 +1277,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 
 	public IVarExpression getEachExpr(final EObject object) {
 		final IVarExpression p = iteratorContexts.peek();
+		if(DEBUG.flag2) {
+			System.out.println(p);
+		}
 		if (p == null) {
 			getContext().error("'each' is not accessible in this context", IGamlIssue.UNKNOWN_VAR, object);
 			return null;

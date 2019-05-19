@@ -31,6 +31,7 @@ public class DEBUG {
 	private static final boolean GLOBAL_OFF = false;
 	private static final boolean GLOBAL_ON = false;
 	public static boolean flag=false;
+	public static boolean flag2=false;
 
 	static {
 		TO_STRING.put(int.class, (o) -> Arrays.toString((int[]) o));

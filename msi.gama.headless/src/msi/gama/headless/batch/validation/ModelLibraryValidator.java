@@ -87,6 +87,7 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 			final URL pathToModel) {
 
 		DEBUG.flag=false;
+		DEBUG.flag2=false;
 		if(pathToModel.getFile().contains("Model 13")) {
 			DEBUG.flag=true;
 		}
