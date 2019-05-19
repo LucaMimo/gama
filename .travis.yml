@@ -13,9 +13,9 @@ notifications:
     on_failure: never
 cache:
   directories:
-  - "$HOME/.m2"
+  - $HOME/.m2
 before_cache:
-  - rm -f $HOME/build/gama-platform/gama/ummisco.gama.product/target/products/ummisco.gama.application.product/linux/gtk/x86_64/
+  - rm -rf $HOME/build/gama-platform/gama/ummisco.gama.product/target/products/ummisco.gama.application.product/linux/gtk/x86_64/configuration/org.eclipse.osgi
 addons:
     apt:
         packages:      
