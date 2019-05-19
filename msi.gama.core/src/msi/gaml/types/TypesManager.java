@@ -153,7 +153,7 @@ public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDesc
 		if (type == null) { return Types.NO_TYPE; }
 		if(DEBUG.flag2) {
 			System.out.print("            "+type+" in TypesManager ");
-			types.values().stream().forEach(t->{System.out.print(t+" ");});
+			types.entrySet().stream().forEach(t->{System.out.print(t.getKey()+" ");});
 			System.out.println();
 		}
 		final IType t = types.get(type);
