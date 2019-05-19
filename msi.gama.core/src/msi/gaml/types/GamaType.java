@@ -30,6 +30,7 @@ import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.TypeDescription;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Written by drogoul Modified on 25 aout 2010
@@ -398,6 +399,9 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	@SuppressWarnings ({ "unchecked", "rawtypes" })
 	public static IType<?> from(final IType<?> t, final IType<?> keyType, final IType<?> contentType) {
+		if(DEBUG.flag2) {
+			System.out.println(" GAMTYPE from "+contentType.toString());
+		}
 		if (t instanceof IContainerType) {
 			if (!(t instanceof GamaSpeciesType))
 				if (contentType.isAssignableFrom(t.getContentType()) && keyType.isAssignableFrom(t.getKeyType())) {
