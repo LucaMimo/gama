@@ -16,7 +16,7 @@ echo "GAMA is starting..."
 #exec
 
 #GAMA=Gamaq
-exec java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -validate 
+java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -validate 
 ee(){
 res=$?
 		
@@ -34,7 +34,7 @@ if [[ $res -gt 0 ]]; then
 	exit $res
 fi
 
-exec java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -test -failed   
+java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -test -failed   
 res=$?			
 if [[ $res -gt 0 ]]; then
 	rm -rf $passWork
