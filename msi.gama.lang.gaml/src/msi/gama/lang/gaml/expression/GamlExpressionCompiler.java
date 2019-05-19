@@ -123,6 +123,7 @@ import msi.gaml.types.IType;
 import msi.gaml.types.ITypesManager;
 import msi.gaml.types.ParametricType;
 import msi.gaml.types.Types;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * The Class GamlExpressionCompiler. Transforms Strings or XText Expressions into GAML IExpressions. Normally invoked by
@@ -520,8 +521,12 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	}
 
 	private IExpression compileFieldExpr(final Expression leftExpr, final Expression fieldExpr) {
+
 		final IExpression owner = compile(leftExpr);
 		if (owner == null) { return null; }
+		if(EGaml.getKeyOf(fieldExpr).equals("energy")&&DEBUG.flag) {
+			System.out.println(owner.getGamlType());
+		}
 		final IType type = owner.getGamlType();
 		final TypeDescription species = type.getSpecies();
 		// hqnghi 28-05-14 search input variable from model, not experiment
@@ -541,7 +546,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 			// can also represent the dot product
 			final String var = EGaml.getKeyOf(fieldExpr);
 			final OperatorProto proto = type.getGetter(var);
-
 			// Special case for matrices
 			if (type.id() == IType.MATRIX && proto == null) { return binary(".", owner, fieldExpr); }
 

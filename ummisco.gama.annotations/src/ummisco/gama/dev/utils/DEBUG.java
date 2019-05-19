@@ -30,6 +30,7 @@ public class DEBUG {
 	private static final ConcurrentHashMap<Class<?>, Function<Object, String>> TO_STRING = new ConcurrentHashMap<>();
 	private static final boolean GLOBAL_OFF = false;
 	private static final boolean GLOBAL_ON = false;
+	public static boolean flag=false;
 
 	static {
 		TO_STRING.put(int.class, (o) -> Arrays.toString((int[]) o));

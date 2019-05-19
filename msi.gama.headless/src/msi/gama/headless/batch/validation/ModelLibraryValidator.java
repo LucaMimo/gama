@@ -18,6 +18,7 @@ import msi.gama.headless.runtime.SystemLogger;
 import msi.gama.lang.gaml.validation.GamlModelBuilder;
 import msi.gaml.compilation.GamlCompilationError;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.dev.utils.DEBUG;
 
 public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 
@@ -84,6 +85,11 @@ public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 
 	private void validate(GamlModelBuilder builder, final int[] countOfModelsValidated, final int[] returnCode,
 			final URL pathToModel) {
+
+		DEBUG.flag=false;
+		if(pathToModel.getFile().contains("Model 13")) {
+			DEBUG.flag=true;
+		}
 		final List<GamlCompilationError> errors = new ArrayList<>();
 		// log("Compiling " + pathToModel.getFile());
 		builder.compile(pathToModel, errors);
