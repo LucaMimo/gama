@@ -31,6 +31,7 @@ import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.ListExpression;
 import msi.gaml.expressions.MapExpression;
 import msi.gaml.factories.DescriptionFactory;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Written by drogoul Modified on 9 juin 2010
@@ -138,6 +139,9 @@ public class Types {
 
 	public static IType get(final int type) {
 		// use cache first
+		if(DEBUG.flag2) {
+			System.out.println("         TYPES get "+type);
+		}
 		switch (type) {
 			case IType.INT:
 				return INT;

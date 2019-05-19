@@ -20,6 +20,7 @@ import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.TypeDescription;
+import ummisco.gama.dev.utils.DEBUG;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDescription>, ITypesManager {
@@ -150,6 +151,11 @@ public class TypesManager implements IDescription.DescriptionVisitor<SpeciesDesc
 	@Override
 	public IType get(final String type) {
 		if (type == null) { return Types.NO_TYPE; }
+		if(DEBUG.flag2) {
+			System.out.print("            "+type+" in TypesManager ");
+			types.values().stream().forEach(t->{System.out.print(t+" ");});
+			System.out.println();
+		}
 		final IType t = types.get(type);
 		if (t != null) { return t; }
 		if (parent == null) { return Types.NO_TYPE; }
