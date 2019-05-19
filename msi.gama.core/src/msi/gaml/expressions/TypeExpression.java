@@ -17,6 +17,7 @@ import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Class TypeExpression.
@@ -29,6 +30,9 @@ public class TypeExpression extends AbstractExpression {
 
 	@SuppressWarnings ("rawtypes")
 	public TypeExpression(final IType type) {
+		if(DEBUG.flag2) {
+			System.out.println("       TypeExpression "+type);
+		}
 		this.type = type;
 	}
 

@@ -462,6 +462,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		// if ( isSkillName(type) ) { return
 		// factory.createOperator(AS_SKILL, context, e2, left, skill(type));
 		// }
+		if(DEBUG.flag2) {
+			System.out.println("     GECompiler binaryAs "+type+" "+left);
+		}
 		if (isTypeName(type)) { return casting(type, left, e2); }
 		getContext().error("'as' must be followed by a type, species or skill name. " + type + " is neither of these.",
 				IGamlIssue.NOT_A_TYPE, e2, type);
