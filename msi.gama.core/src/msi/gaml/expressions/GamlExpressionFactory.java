@@ -41,6 +41,7 @@ import msi.gaml.statements.Arguments;
 import msi.gaml.types.IType;
 import msi.gaml.types.Signature;
 import msi.gaml.types.Types;
+import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * The static class ExpressionFactory.
@@ -272,6 +273,9 @@ public class GamlExpressionFactory implements IExpressionFactory {
 
 	@Override
 	public IExpression createAs(final IDescription context, final IExpression toCast, final IExpression type) {
+		if(DEBUG.flag2) {
+			System.out.println(" createAs "+toCast);
+		}
 		return OperatorProto.AS.create(context, null, toCast, type);
 	}
 

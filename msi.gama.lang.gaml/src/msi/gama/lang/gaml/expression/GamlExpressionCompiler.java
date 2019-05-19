@@ -201,6 +201,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		}
 
 		final IExpression expr = doSwitch(s);
+		if(DEBUG.flag2) {
+			System.out.println("    compile "+expr);
+		}
 		if (expr != null && getContext() != null) {
 			getContext().document(s, expr);
 		}
@@ -476,6 +479,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		if (OF.equals(op)) { return compileFieldExpr(right, e1); }
 		// we can now safely compile the left-hand expression
 		final IExpression left = compile(e1);
+		if(DEBUG.flag2) {
+			System.out.println("      "+e1+" compile e1 "+left);
+		}
 		return binary(op, left, right);
 	}
 

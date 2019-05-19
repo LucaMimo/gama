@@ -66,6 +66,9 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 	}
 
 	protected IType computeType() {
+		if(DEBUG.flag2) {
+			System.out.print("  computeType ");
+		}
 		if (prototype == null) { return Types.NO_TYPE; }
 		IType result = computeType(prototype.typeProvider, 0, prototype.returnType, GamaType.TYPE);
 		if (result.isContainer()) {
@@ -75,7 +78,7 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 			result = GamaType.from(result, keyType, contentType);
 		}
 		if(DEBUG.flag2) {
-			System.out.println(result);
+			System.out.println("  "+result);
 		}
 		return result;
 	}
