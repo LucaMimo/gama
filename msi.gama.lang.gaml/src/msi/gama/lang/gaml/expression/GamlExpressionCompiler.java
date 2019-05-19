@@ -254,7 +254,9 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	private IExpression casting(final String type, final IExpression toCast, final Expression typeObject) {
 		if (toCast == null) { return null; }
 		final IType castingType = currentTypesManager.get(type).typeIfCasting(toCast);
-
+		if(DEBUG.flag2) {
+			System.out.println("  GEComp casting "+castingType.toString());
+		}
 		final boolean isSuperType = castingType.isAssignableFrom(toCast.getGamlType());
 		TypeInfo typeInfo = null;
 		if (typeObject instanceof TypeRef) {
